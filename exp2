@@ -1,0 +1,44 @@
+import numpy as np
+
+# Training data
+X = np.array([
+    [2, 3],
+    [3, 2],
+    [1, 1],
+    [5, 7],
+    [6, 8],
+    [7, 6]
+])
+
+y = np.array([0, 0, 0, 1, 1, 1])
+
+# Initialize weights and bias
+w = np.zeros(2)
+b = 0
+
+# Training the perceptron
+for _ in range(100):
+    for xi, yi in zip(X, y):
+        output = np.dot(w, xi) + b
+        pred = 1 if output > 0 else 0
+
+        error = yi - pred
+
+        w += 0.1 * error * xi
+        b += 0.1 * error
+
+# Test data
+test_data = np.array([
+    [4, 5],
+    [2, 2]
+])
+
+# Prediction
+for data in test_data:
+    output = np.dot(w, data) + b
+    pred = 1 if output > 0 else 0
+
+    if pred == 0:
+        print(f"Data {data} belongs to class 0")
+    else:
+        print(f"Data {data} belongs to class 1")
